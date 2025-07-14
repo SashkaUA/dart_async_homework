@@ -37,6 +37,19 @@ Future<void> sequentialExecution() async {
   print('Час послідовного виконання ${stopwatch.elapsedMilliseconds} мсек');
 }
 
+Future<void> parallelExecution() async {
+  final stopwatch = Stopwatch();
+
+  stopwatch.start();
+  
+  final [name, age] = await Future.wait([fetchName(), fetchAge()]);
+  
+  stopwatch.stop();
+
+  print('Ім\'я: $name. Років: $age');
+  print('Час паралельного виконання ${stopwatch.elapsedMilliseconds} мсек');
+}
+
 void main() async {
   print('---------- Task 1 ----------');
   await fetchName(isPrint: true);
@@ -46,4 +59,7 @@ void main() async {
 
   print('---------- Task 3 ----------');
   await sequentialExecution();
+
+  print('---------- Task 4 ----------');
+  await parallelExecution();
 }
