@@ -50,6 +50,16 @@ Future<void> parallelExecution() async {
   print('Час паралельного виконання ${stopwatch.elapsedMilliseconds} мсек');
 }
 
+Future<String> delayedCountdown(int seconds) async {
+  for (var i = seconds; i > 0; i--) {
+    await Future.delayed(const Duration(seconds: 1), () => print('$i...'));
+  }
+
+  print('Старт!');
+
+  return '';
+}
+
 void main() async {
   print('---------- Task 1 ----------');
   await fetchName(isPrint: true);
@@ -62,4 +72,7 @@ void main() async {
 
   print('---------- Task 4 ----------');
   await parallelExecution();
+
+  print('---------- Task 5 ----------');
+  await delayedCountdown(3);
 }
