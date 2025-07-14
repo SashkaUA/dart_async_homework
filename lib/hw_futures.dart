@@ -23,10 +23,27 @@ Future<String> fetchAge({bool isPrint = false}) async {
   return ageString;
 }
 
+Future<void> sequentialExecution() async {
+  final stopwatch = Stopwatch();
+
+  stopwatch.start();
+  
+  final name = await fetchName();
+  final age = await fetchAge();
+
+  stopwatch.stop();
+
+  print('Ім\'я: $name. Років: $age');
+  print('Час послідовного виконання ${stopwatch.elapsedMilliseconds} мсек');
+}
+
 void main() async {
   print('---------- Task 1 ----------');
   await fetchName(isPrint: true);
 
   print('---------- Task 2 ----------');
   await fetchAge(isPrint: true);
+
+  print('---------- Task 3 ----------');
+  await sequentialExecution();
 }
