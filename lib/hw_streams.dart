@@ -20,10 +20,28 @@ Future<void> streamTask7() async {
   });
 }
 
+Future<void> streamTask8() async {
+  final controller = StreamController<String>();
+
+  controller.stream.listen(
+    (value) => print('Task 8 / StreamController: $value'),
+    onDone: () => print('Task 8 / Стрім завершено')
+  );
+
+  controller.add("Hello");
+  controller.add("World");
+  controller.add("Dart");
+
+  await controller.close();
+}
+
 void main() async {
   print('---------- Task 6 ----------');
   await streamTask6();
 
   print('---------- Task 7 ----------');
   await streamTask7();
+
+  print('---------- Task 8 ----------');
+  await streamTask8();
 }
